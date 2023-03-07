@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'fr.jhelp.models'
+    compileSdk androidTarget
+
+    defaultConfig {
+        minSdk minimumSDK
+        targetSdk androidTarget
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:$ktxCore"
+    implementation "androidx.activity:activity-compose:$composeActivity"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel"
+
+    implementation(project(":data"))
+    implementation(project("::tools"))
+
+    testImplementation "junit:junit:$juint"
+}

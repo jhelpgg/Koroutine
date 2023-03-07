@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'fr.jhelp.koroutine'
+    compileSdk androidTarget
+
+    defaultConfig {
+        applicationId "fr.jhelp.koroutine"
+        minSdk minimumSDK
+        targetSdk androidTarget
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.1.1'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$ktxCore"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$ktxLifecycleRuntime"
+    implementation "androidx.activity:activity-compose:$composeActivity"
+    implementation "androidx.compose.ui:ui:$composeUI"
+    implementation "androidx.compose.material:material:$composeMaterial"
+
+    implementation(project(":models"))
+    implementation(project("::tools"))
+
+    testImplementation "junit:junit:$juint"
+
+    androidTestImplementation "androidx.test.ext:junit:$juintAndroidX"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeUI"
+
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeUI"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$composeUI"
+}
